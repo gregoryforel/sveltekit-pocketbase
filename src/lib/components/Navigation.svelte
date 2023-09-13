@@ -8,7 +8,7 @@
 
 <nav class="list-nav p-4">
     <ul>
-        <li><a href="/" on:click={drawerClose}>Accueil</a></li>
-        <li><a href="/products" on:click={drawerClose}>Produits</a></li>
+        <li><a href="/" on:click={drawerClose}>Home</a></li>
+        <li><a href="/products" on:click={drawerClose}>Products</a></li>
     </ul>
 </nav>

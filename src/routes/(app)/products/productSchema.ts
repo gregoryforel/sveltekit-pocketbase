@@ -27,20 +27,8 @@ const zodPhoto = z
 
 export const productSchema = z.object({
     id: z.string().length(15),
-    attributes: z.string().optional(),
-    batch_unit_price: z.number().min(0).nullable().default(null),
-    batch_size: z.number().min(1).max(1000000).optional().default(1),
-    code: z.string().min(1).max(50),
-    color: z.string().optional(),
-    commission: z.number().min(0).max(100).nullable().default(null),
-    description: z.string().max(500).optional(),
-    isActive: z.boolean().default(true),
     name: z.string().min(2).max(50),
-    organization: z.string().length(15),
-    reference: z.string().min(1).max(50),
-    size: z.string().optional(),
-    type: z.string().length(15),
-    vat: z.number().min(0).max(100).default(20),
+    user_id: z.string().length(15),
     photos: z.array(zodPhoto).optional().default([]),
 })
 

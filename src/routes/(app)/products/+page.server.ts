@@ -4,16 +4,11 @@ import { superValidate } from 'sveltekit-superforms/server'
 import { serializeNonPOJOs } from '$lib/utils'
 import {
     Collections,
-    type ProductTypesResponse,
-    type ProductsResponse,
+    type ProductResponse,
 } from '$lib/pocketbase-types'
 
 import type { PageServerLoad } from './$types'
 import { searchProductsSchema } from './productSchema'
-
-type Texpand = {
-    type: ProductTypesResponse
-}
 
 export const load: PageServerLoad = async (event) => {
     const { locals, url } = event
@@ -92,8 +87,8 @@ const getPaginatedOrganizationProducts = async ({
 
         return serializeNonPOJOs(
             await pb
-                .collection(Collections.Products)
-                .getList<ProductsResponse<unknown, Texpand>>(page, perPage, getListParams)
+                .collection(Collections.Product)
+                .getList<ProductResponse>(page, perPage, getListParams)
         )
     } catch (err: any) {
         console.log('Error getting products: ', err)

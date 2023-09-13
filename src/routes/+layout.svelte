@@ -59,7 +59,7 @@
                             </svg>
                         </span>
                     </button>
-                    <strong class="text-xl uppercase">VRP Next</strong>
+                    <strong class="text-xl uppercase">SvelteKit</strong>
                     {#if $currentOrganization}
                         <strong class="text-xl uppercase ml-2">
                             | {$currentOrganization?.name}</strong
@@ -88,12 +88,12 @@
                                     }
                                 }}
                             >
-                                <button>Déconnexion</button>
+                                <button>Sign out</button>
                             </form>
                         </li>
                     {:else}
-                        <li><a href="/login">Se connecter</a></li>
-                        <li><a href="/register">Créer un compte</a></li>
+                        <li class="ml-2"><a href="/login">Sign in</a></li>
+                        <li class="ml-2"><a href="/register">Create an account</a></li>
                     {/if}
                 </ul>
             </svelte:fragment>

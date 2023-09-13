@@ -51,9 +51,9 @@
     const { enhance } = superForm(data.form)
 </script>
 
-<h1>Produits</h1>
+<h1>Products</h1>
 
-<a href="/products/new" class="btn variant-filled">Créer un nouveau produit</a>
+<a href="/products/new" class="btn variant-filled">Create a new product</a>
 
 <!-- .table-container makes the table responsive -->
 <div class="flex flex-col h-full">
@@ -106,10 +106,10 @@
                 </tr>
                 <tr>
                     <th>Nom</th>
-                    <th>Description</th>
+                    <!-- <th>Description</th>
                     <th class="h-">Type</th>
                     <th class="text-right">Quantité par Lot</th>
-                    <th class="text-right">Prix Lot Unitaire HT</th>
+                    <th class="text-right">Prix Lot Unitaire HT</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -118,7 +118,7 @@
                         <td class="truncate !whitespace-nowrap max-w-xs"
                             >{product.name}</td
                         >
-                        <td class="truncate !whitespace-nowrap max-w-xs"
+                        <!-- <td class="truncate !whitespace-nowrap max-w-xs"
                             >{product.description}</td
                         >
                         <td>{product.expand?.type?.name || ''}</td>
@@ -127,7 +127,7 @@
                             >{eurFormattedPrice.format(
                                 product.batch_unit_price
                             )}</td
-                        >
+                        > -->
                     </tr>
                 {/each}
             </tbody>

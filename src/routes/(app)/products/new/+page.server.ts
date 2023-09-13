@@ -2,57 +2,15 @@ import { error, type Actions, fail } from '@sveltejs/kit'
 import { superValidate } from 'sveltekit-superforms/server'
 import sharp from 'sharp'
 
-import {
-    Collections,
-    type ColorsResponse,
-    type ProductTypesResponse,
-    type ProductsRecord,
-} from '$lib/pocketbase-types'
-import { serializeNonPOJOs } from '$lib/utils'
+import { Collections, type ProductRecord } from '$lib/pocketbase-types'
 import { newProductSchema } from '../productSchema'
 import type { PageServerLoad } from './$types'
 
 export const load: PageServerLoad = async (event) => {
-    const getProductTypes = async (userId: string | undefined) => {
-        try {
-            return serializeNonPOJOs(
-                await event.locals.pb
-                    .collection(Collections.ProductTypes)
-                    .getFullList<ProductTypesResponse>(undefined, {
-                        userId,
-                        sort: 'name',
-                    })
-            )
-        } catch (err: any) {
-            console.log('Error getting product types: ', err)
-            throw error(err.status, err.message)
-        }
-    }
-
-    const getColors = async (userId: string | undefined) => {
-        try {
-            return serializeNonPOJOs(
-                await event.locals.pb
-                    .collection(Collections.Colors)
-                    .getFullList<ColorsResponse>(undefined, {
-                        userId,
-                        sort: 'fr',
-                    })
-            )
-        } catch (err: any) {
-            console.log('Error getting colors: ', err)
-            throw error(err.status, err.message)
-        }
-    }
-
     const form = await superValidate(event, newProductSchema)
-    const productTypes = await getProductTypes(event.locals?.user?.id)
-    const colors = await getColors(event.locals?.user?.id)
 
     return {
-        colors,
         form,
-        productTypes,
     }
 }
 
@@ -63,7 +21,6 @@ export const actions: Actions = {
             (img) => img.size > 0
         )
 
-        formData.append('isActive', 'true')
         formData.delete('photos') //  superform sends photos as an array of empty strings, so we delete it and add it back later
 
         // Compress photos
@@ -88,8 +45,8 @@ export const actions: Actions = {
 
         try {
             await locals.pb
-                .collection(Collections.Products)
-                .create<ProductsRecord>(formData, { userId: locals?.user?.id })
+                .collection(Collections.Product)
+                .create<ProductRecord>(formData, { userId: locals?.user?.id })
         } catch (err: any) {
             console.log('Error creating product: ', err)
             throw error(err.status, err.message)
