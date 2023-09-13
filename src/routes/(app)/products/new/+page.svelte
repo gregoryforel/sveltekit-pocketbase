@@ -85,7 +85,7 @@
                     </svg>
                 </svelte:fragment>
                 <svelte:fragment slot="message"
-                    >Upload produt pics</svelte:fragment
+                    >Upload product pics</svelte:fragment
                 >
                 <svelte:fragment slot="meta"
                     >PNG, JPG, GIF up to 5MB</svelte:fragment

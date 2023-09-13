@@ -62,7 +62,7 @@
         <table class="table table-hover table-compact">
             <thead>
                 <tr>
-                    <th colspan="2">
+                    <th colspan="1">
                         <form
                             class="flex flex-1"
                             action="?/search"
@@ -93,7 +93,7 @@
                             </label>
                         </form>
                     </th>
-                    <th colspan="3">
+                    <th colspan="1">
                         <Paginator
                             bind:settings={paginator}
                             showFirstLastButtons={true}
@@ -105,46 +105,16 @@
                     </th>
                 </tr>
                 <tr>
-                    <th>Nom</th>
-                    <!-- <th>Description</th>
-                    <th class="h-">Type</th>
-                    <th class="text-right">Quantité par Lot</th>
-                    <th class="text-right">Prix Lot Unitaire HT</th> -->
+                    <th colspan="2">Nom</th>
                 </tr>
             </thead>
             <tbody>
                 {#each products as product (product.id)}
                     <tr on:click={() => handleOnProductClick(product.id)}>
-                        <td class="truncate !whitespace-nowrap max-w-xs"
-                            >{product.name}</td
-                        >
-                        <!-- <td class="truncate !whitespace-nowrap max-w-xs"
-                            >{product.description}</td
-                        >
-                        <td>{product.expand?.type?.name || ''}</td>
-                        <td class="text-right">{product.batch_size}</td>
-                        <td class="text-right"
-                            >{eurFormattedPrice.format(
-                                product.batch_unit_price
-                            )}</td
-                        > -->
+                        <td class="truncate !whitespace-nowrap max-w-xs" colspan="2">{product.name}</td>
                     </tr>
                 {/each}
             </tbody>
-            <tfoot>
-                <!-- <tr>
-                    <th colspan="5">
-                        <Paginator
-                            bind:settings={paginator}
-                            showFirstLastButtons={false}
-                            showPreviousNextButtons={true}
-                            showNumerals
-                            on:page={onPageChange}
-                            on:amount={onAmountChange}
-                        />
-                    </th>
-                </tr> -->
-            </tfoot>
         </table>
     </div>
 </div>

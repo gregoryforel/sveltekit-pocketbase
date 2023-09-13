@@ -15,7 +15,7 @@
 
     const { constraints, enhance, errors, form } = superForm(data.form, {
         taintedMessage:
-            'Quitter la page sans finaliser la création du produit?',
+            'Leave without finalizing product creation?',
     })
 
     let previews: string[] =
@@ -31,7 +31,7 @@
         const target = e?.target
         const files = [...(target as any)?.files]
 
-        if (files.length > 0) {
+        if (files && files.length > 0) {
             console.log('files', files)
 
             files.forEach((file: File) => {
@@ -46,34 +46,22 @@
 
 <div class="flex flex-col w-full h-full p-2">
     <form
-        class="w-full grid grid-cols-1 md:grid-cols-2 gap-4"
+        class="w-full grid grid-cols-1 md:grid-cols-1 gap-4"
         action="?/update"
         method="POST"
         enctype="multipart/form-data"
         use:enhance
     >
         <section class="space-y-4 max-w-2xl">
-            <!-- Organization: this field is hidden to the user! -->
-            <label for="organization" class="label hidden">
-                <span>Organisation</span>
-                <input
-                    class="input"
-                    type="text"
-                    id="organization"
-                    name="organization"
-                    value={$currentOrganization?.id || ''}
-                />
-            </label>
-
             <label for="name" class="label">
-                <span>Nom du produit</span>
+                <span>Product Name</span>
                 <input
                     class="input"
                     type="text"
                     id="name"
                     name="name"
-                    title="Entrez le nom du produit"
-                    placeholder="Ex: Chaussures orthopédiques..."
+                    title="Product name"
+                    placeholder="Ex: shoes..."
                     autocomplete="off"
                     {...$constraints.name}
                     bind:value={$form.name}
@@ -82,232 +70,6 @@
                     <p class="text-red-500">{$errors.name}</p>
                 {/if}
             </label>
-
-            <label for="description" class="label">
-                <span>Description</span>
-                <textarea
-                    class="input"
-                    rows="2"
-                    id="description"
-                    name="description"
-                    title="Entrez la description du produit"
-                    placeholder="Ex: Chaussures orthopédiques adaptées aux personnes âgées et aux personnes à mobilité réduite."
-                    {...$constraints.description}
-                    bind:value={$form.description}
-                />
-                {#if $errors.description}
-                    <p class="text-red-500">{$errors.description}</p>
-                {/if}
-            </label>
-
-            <!-- Group Ref, Product Code, Product Type, Color -->
-            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
-                <label for="reference" class="label">
-                    <span>Référence</span>
-                    <div
-                        class="input-group input-group-divider grid-cols-[auto_1fr_auto]"
-                    >
-                        <input
-                            class="input"
-                            type="text"
-                            id="reference"
-                            name="reference"
-                            title="Entrez la référence du produit"
-                            placeholder="Ex: ORTHO-CHAUSS-01"
-                            autocomplete="off"
-                            {...$constraints.reference}
-                            bind:value={$form.reference}
-                        />
-                    </div>
-                    {#if $errors.reference}
-                        <p class="text-red-500">{$errors.reference}</p>
-                    {/if}
-                </label>
-
-                <label for="code" class="label">
-                    <span>Code Produit</span>
-                    <div
-                        class="input-group input-group-divider grid-cols-[auto_1fr_auto]"
-                    >
-                        <input
-                            class="input"
-                            type="text"
-                            id="code"
-                            name="code"
-                            title="Entrez la référence du code"
-                            placeholder="Code Produit"
-                            autocomplete="off"
-                            {...$constraints.code}
-                            bind:value={$form.code}
-                        />
-                    </div>
-                    {#if $errors.code}
-                        <p class="text-red-500">{$errors.code}</p>
-                    {/if}
-                </label>
-            </div>
-
-            <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
-                <label for="type" class="label">
-                    <span>Type de produit</span>
-                    <div class="select-group grid-cols-[auto_1fr_auto]">
-                        <ClearSelectionButton
-                            clearSelection={() => ($form.type = '')}
-                            visible={!!$form.type}
-                        />
-                        <select
-                            class="select"
-                            bind:value={$form.type}
-                            id="type"
-                            name="type"
-                            {...$constraints.type}
-                        >
-                            {#each productTypes as type}
-                                <option value={type.id}>{type.name}</option>
-                            {/each}
-                        </select>
-                    </div>
-
-                    {#if $errors.type}
-                        <p class="text-red-500">{$errors.type}</p>
-                    {/if}
-                </label>
-
-                <label for="size" class="label">
-                    <span>Taille</span>
-                    <input
-                        class="input"
-                        type="text"
-                        id="size"
-                        name="size"
-                        title="Entrez la taille du produit"
-                        placeholder="Ex: 36, XL, etc."
-                        autocomplete="off"
-                        {...$constraints.size}
-                        bind:value={$form.size}
-                    />
-                    {#if $errors.size}
-                        <p class="text-red-500">{$errors.size}</p>
-                    {/if}
-                </label>
-
-                <label for="color" class="label">
-                    <span>Couleur</span>
-                    <div class="select-group grid-cols-[auto_1fr_auto]">
-                        <ClearSelectionButton
-                            clearSelection={() => ($form.color = '')}
-                            visible={!!$form.color}
-                        />
-                        <select
-                            class="select"
-                            bind:value={$form.color}
-                            id="color"
-                            name="color"
-                            {...$constraints.color}
-                        >
-                            {#each colors as color (color.id)}
-                                <option value={color.id}>{color.fr}</option>
-                            {/each}
-                        </select>
-                    </div>
-                    {#if $errors.color}
-                        <p class="text-red-500">{$errors.color}</p>
-                    {/if}
-                </label>
-            </div>
-
-            <!-- Group Batch Size, etc. -->
-            <div class="w-full grid grid-cols-1 md:grid-cols-4 gap-4">
-                <label for="batch_size" class="label">
-                    <span>Taille du lot</span>
-                    <input
-                        class="input"
-                        type="number"
-                        id="batch_size"
-                        name="batch_size"
-                        title="Entrez la taille du lot"
-                        placeholder="1"
-                        autocomplete="off"
-                        {...$constraints.batch_size}
-                        bind:value={$form.batch_size}
-                    />
-                    {#if $errors.batch_size}
-                        <p class="text-red-500">{$errors.batch_size}</p>
-                    {/if}
-                </label>
-
-                <label for="batch_unit_price" class="label">
-                    <span>Prix lot HT</span>
-                    <div
-                        class="input-group input-group-divider grid-cols-[auto_1fr_auto]"
-                    >
-                        <div class="input-group-shim">€</div>
-                        <input
-                            class="input"
-                            type="number"
-                            step="any"
-                            id="batch_unit_price"
-                            name="batch_unit_price"
-                            title="Entrez la taille du lot"
-                            placeholder="1"
-                            autocomplete="off"
-                            {...$constraints.batch_unit_price}
-                            bind:value={$form.batch_unit_price}
-                        />
-                    </div>
-                    {#if $errors.batch_unit_price}
-                        <p class="text-red-500">{$errors.batch_unit_price}</p>
-                    {/if}
-                </label>
-
-                <label for="vat" class="label">
-                    <span>TVA</span>
-                    <div
-                        class="input-group input-group-divider grid-cols-[auto_1fr_auto]"
-                    >
-                        <input
-                            class="input"
-                            type="number"
-                            step="any"
-                            id="vat"
-                            name="vat"
-                            title="Entrez la TVA"
-                            placeholder="20"
-                            autocomplete="off"
-                            {...$constraints.vat}
-                            bind:value={$form.vat}
-                        />
-                        <div class="input-group-shim">%</div>
-                    </div>
-                    {#if $errors.vat}
-                        <p class="text-red-500">{$errors.vat}</p>
-                    {/if}
-                </label>
-
-                <label for="commission" class="label">
-                    <span>Commission</span>
-                    <div
-                        class="input-group input-group-divider grid-cols-[auto_1fr_auto]"
-                    >
-                        <input
-                            class="input"
-                            type="number"
-                            step="any"
-                            id="commission"
-                            name="commission"
-                            title="Entrez la commission en %"
-                            placeholder="Ex: 16"
-                            autocomplete="off"
-                            {...$constraints.commission}
-                            bind:value={$form.commission}
-                        />
-                        <div class="input-group-shim">%</div>
-                    </div>
-                    {#if $errors.commission}
-                        <p class="text-red-500">{$errors.commission}</p>
-                    {/if}
-                </label>
-            </div>
 
             <FileDropzone
                 id="photos"
@@ -333,14 +95,14 @@
                     </svg></svelte:fragment
                 >
                 <svelte:fragment slot="message"
-                    >Uploadez les photos de vos produits</svelte:fragment
+                    >Upload product pics</svelte:fragment
                 >
                 <svelte:fragment slot="meta"
-                    >PNG, JPG, GIF, WEBP, AVIF, JFIF jusqu'à 5MB</svelte:fragment
+                    >PNG, JPG, GIF, WEBP, AVIF, JFIF up to 5MB</svelte:fragment
                 >
             </FileDropzone>
 
-            <button type="submit" class="btn variant-filled">Enregistrer</button
+            <button type="submit" class="btn variant-filled">Save</button
             >
         </section>
 

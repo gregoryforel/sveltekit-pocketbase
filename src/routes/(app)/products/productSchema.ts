@@ -12,7 +12,7 @@ const zodPhoto = z
             if (val.size < 10000 || val.size > MAX_FILE_SIZE) {
                 ctx.addIssue({
                     code: z.ZodIssueCode.custom,
-                    message: `Avatar must be between 10KB & ${Math.round(5_000_000 / 1_000_000)}MB`
+                    message: `Avatar must be between 10KB & ${Math.round(MAX_FILE_SIZE / 1_000_000)}MB`
                 });
             }
 
@@ -28,7 +28,7 @@ const zodPhoto = z
 export const productSchema = z.object({
     id: z.string().length(15),
     name: z.string().min(2).max(50),
-    user_id: z.string().length(15),
+    user_id: z.string(),
     photos: z.array(zodPhoto).optional().default([]),
 })
 
