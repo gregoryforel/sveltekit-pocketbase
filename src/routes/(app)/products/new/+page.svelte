@@ -4,7 +4,7 @@
     import { superForm } from 'sveltekit-superforms/client'
 
     import type { PageData } from './$types'
-    import { currentOrganization } from '$lib/stores/organization'
+    import { currentUser } from '$lib/stores/user'
     import ClearSelectionButton from '$lib/components/ClearSelectionButton.svelte'
 
     export let data: PageData
@@ -42,7 +42,19 @@
         enctype="multipart/form-data"
         use:enhance
     >
-        <section class="space-y-4 max-w-2xl">
+        <section class="space-y-4 max-w-2xl ">
+            <!-- Organization: this field is hidden to the user! -->
+            <label for="user_id" class="label hidden">
+                <span>Organisation</span>
+                <input
+                    class="input"
+                    type="text"
+                    id="user_id"
+                    name="user_id"
+                    value={$currentUser.id || ''}
+                />
+            </label>
+
             <label for="name" class="label">
                 <span>Product Name</span>
                 <input
