@@ -79,8 +79,6 @@ const getPaginatedOrganizationProducts = async ({
                 return `(name ?~ "${s}")`
             }).join(' && ')
 
-            console.log('searchStr', searchStr)
-
             getListParams.filter = searchStr
         }
 

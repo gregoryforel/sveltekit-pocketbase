@@ -22,8 +22,6 @@
         const files = [...(target as any)?.files]
 
         if (files.length > 0) {
-            console.log('files', files)
-
             files.forEach((file: File) => {
                 const src = URL.createObjectURL(file)
                 previews = [...previews, src]

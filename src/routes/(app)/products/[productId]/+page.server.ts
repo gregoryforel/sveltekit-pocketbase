@@ -29,8 +29,6 @@ export const load: PageServerLoad = async (event) => {
     const product = await getOneUserProduct(locals?.user?.id)
     const form = await superValidate(product, newProductSchema)
 
-    console.log(product)
-
     return {
         form,
         product,

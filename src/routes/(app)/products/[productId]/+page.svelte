@@ -27,15 +27,11 @@
             })
         }) ?? []
 
-        console.log('previews', previews)
-
     function onChangeHandler(e: Event): void {
         const target = e?.target
         const files = [...(target as any)?.files]
 
         if (files && files.length > 0) {
-            console.log('files', files)
-
             files.forEach((file: File) => {
                 const src = URL.createObjectURL(file)
                 previews = [...previews, src]
