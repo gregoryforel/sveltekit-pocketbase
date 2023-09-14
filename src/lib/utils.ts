@@ -23,5 +23,6 @@ export const serializeNonPOJOs = <T>(obj: T) => {
 export const getImageURL = (
     { collection, recordId, fileName, size }: { collection: string, recordId: string, fileName: string, size?: string }
 ) => {
+    if (!collection || !recordId || !fileName) throw new Error(`Missing required parameters: ${JSON.stringify({ collection, recordId, fileName })}`)
     return `${PUBLIC_POCKETBASE_URL}/api/files/${collection}/${recordId}/${fileName}${size ? `?size=${size}` : ''}`;
 };

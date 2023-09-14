@@ -13,12 +13,12 @@ export const load: PageServerLoad = async (event) => {
     const { locals, params } = event
     const productId = params.productId
 
-    const getOneOrganizationProduct = async (userId: string | undefined) => {
+    const getOneUserProduct = async (userId: string | undefined) => {
         try {
             return serializeNonPOJOs(
                 await locals.pb
                     .collection(Collections.Product)
-                    .getOne<ProductResponse>(productId, { userId, expand: 'type' })
+                    .getOne<ProductResponse>(productId, { userId })
             )
         } catch (err: any) {
             console.log('Error getting products: ', err)
@@ -26,8 +26,10 @@ export const load: PageServerLoad = async (event) => {
         }
     }
 
-    const product = await getOneOrganizationProduct(locals?.user?.id)
+    const product = await getOneUserProduct(locals?.user?.id)
     const form = await superValidate(product, newProductSchema)
+
+    console.log(product)
 
     return {
         form,

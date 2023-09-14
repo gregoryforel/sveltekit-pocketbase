@@ -21,11 +21,13 @@
     let previews: string[] =
         product.photos.map((fileName) => {
             return getImageURL({
-                collection: Collections.Products,
+                collection: Collections.Product,
                 fileName,
                 recordId: product.id,
             })
         }) ?? []
+
+        console.log('previews', previews)
 
     function onChangeHandler(e: Event): void {
         const target = e?.target
