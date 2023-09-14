@@ -6,13 +6,9 @@ This is a project that demonstrates how to integrate PocketBase with SvelteKit 1
 
 ## Developing
 
-To get started with this project, you will need to have PocketBase installed and running on your system. You can find more information about installing and setting up PocketBase at the [PocketBase website](https://pocketbase.io/).
+To get started with this project, simply download PocketBase from the [PocketBase website](https://pocketbase.io/docs/). Extract it in the `/backend` folder so that you end up with `/backend/pocketbase.exe` (Microsoft Windows example)
 
-```
-./pocketbase serve
-```
-
-Copy `.env.example` to `.env` and make changes as necessary.
+Copy `.env.example` to `.env`, you're good to go, but you can make changes if necessary.
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
@@ -21,6 +17,11 @@ npm run dev
 
 # or start the server and open the app in a new browser tab
 npm run dev -- --open
+```
+
+Open a new cmd line and run the backend as well:
+```bash
+npm run pocketbase
 ```
 
 ## Building
