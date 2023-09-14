@@ -5,6 +5,7 @@ import sharp from 'sharp'
 import { Collections, type ProductRecord } from '$lib/pocketbase-types'
 import { newProductSchema } from '../productSchema'
 import type { PageServerLoad } from './$types'
+import { goto } from '$app/navigation'
 
 export const load: PageServerLoad = async (event) => {
     const form = await superValidate(event, newProductSchema)
@@ -47,6 +48,7 @@ export const actions: Actions = {
             await locals.pb
                 .collection(Collections.Product)
                 .create<ProductRecord>(formData, { userId: locals?.user?.id })
+
         } catch (err: any) {
             console.log('Error creating product: ', err)
             throw error(err.status, err.message)

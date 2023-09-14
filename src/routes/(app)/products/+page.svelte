@@ -87,7 +87,7 @@
                                     type="search"
                                     id="search"
                                     name="search"
-                                    placeholder="Cherchez un produit..."
+                                    placeholder="Search a product..."
                                     autocomplete="off"
                                 />
                             </label>

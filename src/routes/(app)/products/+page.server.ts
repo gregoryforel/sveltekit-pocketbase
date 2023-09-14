@@ -71,13 +71,12 @@ const getPaginatedOrganizationProducts = async ({
     try {
         const getListParams: any = {
             userId,
-            expand: 'type',
             sort: 'name',
         }
 
         if (search) {
             const searchStr = search.split(' ').map((s) => {
-                return `(name ?~ "${s}" || description ?~ "${s}")`
+                return `(name ?~ "${s}")`
             }).join(' && ')
 
             console.log('searchStr', searchStr)

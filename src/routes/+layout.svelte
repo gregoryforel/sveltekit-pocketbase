@@ -43,7 +43,7 @@
         <!-- App Bar -->
         <AppBar>
             <svelte:fragment slot="lead">
-                <div class="flex items-center">
+                <div class="flex items-center h-10">
                     <button
                         class="lg:hidden btn btn-sm mr-4"
                         on:click={drawerOpen}
