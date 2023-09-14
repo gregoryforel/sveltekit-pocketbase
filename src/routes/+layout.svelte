@@ -68,15 +68,17 @@
                 </div>
             </svelte:fragment>
             <svelte:fragment slot="trail">
-                <ul class="flex flex-h gap-2">
+                <ul class="flex flex-h gap-6 items-center">
                     <li><LightSwitch /></li>
                     {#if $currentUser}
-                        <Avatar
-                            src="http://127.0.0.1:8090/api/files/users/{$currentUser.id}/{$currentUser.avatar}"
-                            width="w-12"
-                            rounded="rounded-full"
-                            border="border-2 border-surface-500"
-                        />
+                        <li>
+                            <Avatar
+                                src="http://127.0.0.1:8090/api/files/users/{$currentUser.id}/{$currentUser.avatar}"
+                                width="w-10"
+                                rounded="rounded-full"
+                                border="border-2 border-surface-500"
+                            />
+                        </li>
                         <li>
                             <form
                                 method="POST"
@@ -92,8 +94,8 @@
                             </form>
                         </li>
                     {:else}
-                        <li class="ml-2"><a href="/login">Sign in</a></li>
-                        <li class="ml-2"><a href="/register">Create an account</a></li>
+                        <li><a href="/login">Sign in</a></li>
+                        <li><a href="/register">Create an account</a></li>
                     {/if}
                 </ul>
             </svelte:fragment>
