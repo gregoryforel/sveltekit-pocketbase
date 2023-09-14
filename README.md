@@ -24,6 +24,8 @@ Open a new cmd line and run the backend as well:
 npm run pocketbase
 ```
 
+The first time you go to [the Pocketbase admin interface](http://127.0.0.1:8090/_/), you'll be asked to create an Admin user.
+
 ## Building
 
 To create a production version of your app:
