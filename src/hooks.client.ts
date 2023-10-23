@@ -1,5 +1,5 @@
 import { pb } from '$lib/pocketbase'
-import { Collections, type OrganizationsResponse } from '$lib/pocketbase-types'
+import { Collections, type OrganizationResponse } from '$lib/pocketbase-types'
 import { currentOrganization } from '$lib/stores/organization'
 import { currentUser } from '$lib/stores/user'
 import { serializeNonPOJOs } from '$lib/utils'
@@ -10,8 +10,8 @@ pb.authStore.onChange(() => {
     const getOrg = async (userId: string) => {
         const organizations = serializeNonPOJOs(
             await pb
-                .collection(Collections.Organizations)
-                .getFullList<OrganizationsResponse>(undefined, { userId })
+                .collection(Collections.Organization)
+                .getFullList<OrganizationResponse>(undefined, { userId })
         )
 
         if (organizations?.length > 0) {
