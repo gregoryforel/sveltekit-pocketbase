@@ -3,9 +3,9 @@ import { z } from 'zod'
 export const schemaSchema = z.object({
     id: z.string().length(15),
     name: z.string().min(2).max(50),
-    description: z.string().min(2).max(50).optional(),
+    description: z.string().optional(),
     user_id: z.string(),
-    schema: z.any(),
+    schema: z.object({}),
 })
 
 export const newSchemaSchema = schemaSchema.extend({

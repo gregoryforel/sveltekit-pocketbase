@@ -1,4 +1,4 @@
-P<script lang="ts">schema
+<script lang="ts">
     import { FileDropzone } from '@skeletonlabs/skeleton'
     import 'iconify-icon'
     import { superForm } from 'sveltekit-superforms/client'
@@ -12,14 +12,15 @@ P<script lang="ts">schema
 
     const { colors, schemaTypes, schema } = data
 
-    const { constraints, enhance, errors, form } = superForm(data.form, {
+    const { constraints, enhance, errors, form } = superForm(data.form, {        
         taintedMessage:
             'Leave without finalizing schema creation?',
+            dataType: 'json'
     })
 
 </script>
 
-<h1>{data.schema.name}</h1>
+<!-- <h1>{data.schema.name}</h1> -->
 
 <div class="flex flex-col w-full h-full p-2">
     <form
@@ -51,16 +52,6 @@ P<script lang="ts">schema
     
             <button type="submit" class="btn variant-filled">Save</button
             >
-        </section>
-
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-2">
-            {#each previews as preview (preview)}
-                <img
-                    class="h-auto max-w-full rounded-lg"
-                    alt=""
-                    src={preview}
-                />
-            {/each}
         </section>
     </form>
 </div>
